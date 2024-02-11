@@ -41,7 +41,7 @@ This application is covered by the [MIT License](https://opensource.org/licenses
 
 [Weather Dashboard](https://danyon-talbot.github.io/weather-dashboard/)
 
-![Screenshot](../Assets/images/Weather-Dashboard.png)
+![Screenshot](./assets/images/Weather-Dashboard.png)
 
 ## Installation:
 
