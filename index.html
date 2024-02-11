@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/jass.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Dashboard</title>
+</head>
+<body class="flex-column min-100-vh">
+    <header class="hero">
+      <h1 class="app-title"><i class="fab fa-github"></i> Weather Dashboard</h1>
+    </header>
+  
+  
+    <main class="flex-row justify-space-between">
+      <div class="col-12 col-md-4">
+  
+        <div class="card">
+          <h3 class="card-header text-uppercase">Search for a City:</h3>
+          <form id="user-form" class="card-body">
+            <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+            <button type="submit" class="btn">Search</button>
+          </form>
+        </div>
+  
+        <div class="card">
+          <div id="previous-city-buttons" class="city-card-body">
+            <button class="btn">Test Button</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-12 col-md-8">
+        <h2 class="subtitle">5-Day Forcast: <span id="city-search-term"></span></h2>
+        <div id="weather-card-container" class="list-group"></div>
+      </div>
+    </main>
+  
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
