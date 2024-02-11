@@ -172,6 +172,12 @@
   .city-card-body {
     border-top: #43264b solid;
   }
+
+  #current-city {
+    border: #43264b solid;
+    padding: 1%;
+    border-radius: var(--border-radius);
+  }
   /* FORM */
   .form-label,
   .form-input,
