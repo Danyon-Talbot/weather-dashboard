@@ -3,7 +3,6 @@ const userForm = document.querySelector('#search-city-form');
 const cityInput = document.querySelector('#city');
 const previousCityButtons = document.querySelector('#previous-city-buttons');
 const currentCity = document.querySelector('#weather-cards');
-const weatherCardContainer = document.querySelector('#weather-cards');
 
 // Display previous cities when the page loads
 displayPreviousCities();
@@ -54,12 +53,12 @@ function updateUI(weatherData) {
     currentCity.innerHTML = `
     <div id="current-city" class="card">
         <h1>Current City: ${cityName}</h1>
-        <img src="http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="Weather Icon">
+        <img class='current-city-img' src="http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="Weather Icon">
         <h2>Date: ${date.toDateString()}</h2>
         <h2>Temperature: ${temperatureCelsius} °C</h2>
         <h2>Humidity: ${weatherData.main.humidity}%</h2>
         <h2>Wind Speed: ${weatherData.wind.speed} m/s</h2>
-        <button id="fetch-forecast-btn">Fetch 5-Day Forecast</button>
+        <button class='btn-5' id="fetch-forecast-btn">Fetch 5-Day Forecast</button>
     </div>
     `;
 
@@ -85,6 +84,11 @@ function fetchFiveDayForecast(cityName) {
 
 }
 
+function getDayOfWeek(dayIndex) {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return daysOfWeek[dayIndex];
+}
+
 // Function to get the next five days starting from tomorrow
 function getNextFiveDays() {
     const nextFiveDays = [];
@@ -98,7 +102,6 @@ function getNextFiveDays() {
     return nextFiveDays;
 }
 
-
 function displayFiveDayForecast(forecastData) {
     const cityName = forecastData.city.name;
     const weatherCardsContainer = document.querySelector('#weather-cards'); // Select the weather-cards container
@@ -106,11 +109,8 @@ function displayFiveDayForecast(forecastData) {
     // Create a container div for the forecast cards
     const forecastCardsContainer = document.createElement('div');
     forecastCardsContainer.classList.add('forecast-cards');
-
-    // Add the 5-Day Forecast subtitle with the city name
-    const subtitle = document.createElement('h2');
-    subtitle.textContent = `5-Day Forecast: ${cityName}`;
-    forecastCardsContainer.appendChild(subtitle);
+    forecastCardsContainer.classList.add('flex-row');
+    forecastCardsContainer.classList.add('justify-space-between');
 
     // Get the next five days starting from tomorrow
     const nextFiveDays = getNextFiveDays();
@@ -125,10 +125,11 @@ function displayFiveDayForecast(forecastData) {
         const forecastCard = document.createElement('div');
         forecastCard.classList.add('card');
         forecastCard.innerHTML = `
-            <div class="card">
+            <div class="card forecast-card">
                 <h2 class="subtitle">${dayOfWeek}</h2>
-                <div class="card-header">${date.toDateString()}</div>
+                <div class="card-date">${date.toDateString()}</div>
                 <div class="card-body">
+                    <img class='current-city-img' src="http://openweathermap.org/img/w/${forecastItem.weather[0].icon}.png" alt="Weather Icon">
                     <p>Temperature: ${temperature} °C</p>
                     <p>Humidity: ${forecastItem.main.humidity}%</p>
                     <p>Wind Speed: ${forecastItem.wind.speed} m/s</p>
@@ -138,9 +139,15 @@ function displayFiveDayForecast(forecastData) {
         forecastCardsContainer.appendChild(forecastCard); // Append forecast cards to the forecast cards container
     });
 
-    // Append the forecast cards container to the weather-cards container
+    // Add the 5-Day Forecast subtitle with the city name
+    const subtitle = document.createElement('h2');
+    subtitle.textContent = `5-Day Forecast: ${cityName}`;
+    
+    // Append the subtitle and forecast cards container to the weather-cards container
+    weatherCardsContainer.appendChild(subtitle);
     weatherCardsContainer.appendChild(forecastCardsContainer);
 }
+
 
 
 
